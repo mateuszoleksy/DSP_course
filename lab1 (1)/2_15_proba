@@ -1,0 +1,18 @@
+function ramp_wave_bl(t; A=1.0, T=1.0, band=20.0)
+    faza = 1000 * 2 * pi * f / fs - pi
+    sygnal = zeros(1000)
+    k = 1
+    while (k * f < fs / 2)
+        sygnal += (1 / k) * sin(k * faza)
+        k += 1
+    sygnal = sygnal .* ((-2) / pi)
+    end
+    return sygnal
+end
+x = ramp_wave_bl(1000; A=1, T=1, band=20)
+using CairoMakie
+f = Figure()
+f = lines(range(1,400,400), x)
+f
+
+
